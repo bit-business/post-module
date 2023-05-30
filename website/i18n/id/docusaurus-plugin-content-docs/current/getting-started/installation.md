@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Installation
 
-1. [Install skijasi](https://skijasi-docs.uatech.co.id/getting-started/installation) pertama. Setelah itu, Anda dapat memasukkan paket Skijasi dengan perintah berikut.
+1. [Install skijasi](https://skijasi-docs.nadzorserveraweb.hr/getting-started/installation) pertama. Setelah itu, Anda dapat memasukkan paket Skijasi dengan perintah berikut.
 
 Untuk skijasi v2.x (Laravel 8)
 ```

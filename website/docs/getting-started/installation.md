@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Installation
 
-1. [Install skijasi](https://skijasi-docs.uatech.co.id/getting-started/installation) first. After that, you can include the Skijasi package with the following command.
+1. [Install skijasi](https://skijasi-docs.nadzorserveraweb.hr/getting-started/installation) first. After that, you can include the Skijasi package with the following command.
 
     For skijasi v2.x (Laravel 8)
     ```

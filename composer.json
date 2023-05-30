@@ -16,7 +16,7 @@
     "news"
   ],
   "license": "proprietary",
-  "homepage": "https://skijasi-post.uatech.co.id/",
+  "homepage": "https://skijasi-post.nadzorserveraweb.hr/",
   "support": {
     "issues": "https://github.com/nadzorservera-croatia/skijasi-post-module/issues",
     "discussion": "https://github.com/nadzorservera-croatia/skijasi-post-module/discussions",
@@ -32,7 +32,7 @@
   "authors": [
     {
       "name": "NADZORSERVERA",
-      "email": "hello@uatech.co.id"
+      "email": "hello@nadzorserveraweb.hr"
     }
   ],
   "minimum-stability": "alpha",
