@@ -1,0 +1,60 @@
+{
+  "name": "skijasi/post-module",
+  "version": "2.2.1",
+  "description": "Post system on skijasi, create blog & news site faster",
+  "keywords": [
+    "laravel",
+    "admin",
+    "panel",
+    "dashboard",
+    "pwa",
+    "vue",
+    "generator",
+    "blog",
+    "skijasi",
+    "post",
+    "news"
+  ],
+  "license": "proprietary",
+  "homepage": "https://skijasi-post.uatech.co.id/",
+  "support": {
+    "issues": "https://github.com/nadzorservera-croatia/skijasi-post-module/issues",
+    "discussion": "https://github.com/nadzorservera-croatia/skijasi-post-module/discussions",
+    "source": "https://github.com/nadzorservera-croatia/skijasi-post-module"
+  },
+  "type": "library",
+  "require": {
+    "skijasi/core": "*",
+    "symfony/var-exporter": "^5.2.0|^6.0",
+    "google/apiclient": "^2.9",
+    "guzzlehttp/guzzle": "^7.3"
+  },
+  "authors": [
+    {
+      "name": "NADZORSERVERA",
+      "email": "hello@uatech.co.id"
+    }
+  ],
+  "minimum-stability": "alpha",
+  "autoload": {
+    "psr-4": {
+      "NadzorServera\\Skijasi\\Module\\Post\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "NadzorServera\\Skijasi\\Module\\Post\\Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "NadzorServera\\Skijasi\\Module\\Post\\Providers\\SkijasiPostModuleServiceProvider"
+      ]
+    }
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^1.4",
+    "orchestra/testbench": "*"
+  }
+}

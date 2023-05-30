@@ -1,0 +1,11 @@
+parameters:
+    ignoreErrors:
+    -'#Call to an undefined static method NadzorServera\\Skijasi\\Module\\Post\\Facades\\SkijasiPostModule::getProtectedTables[()]+.#'
+    -'#Call to an undefined static method NadzorServera\\Skijasi\\Models\\[a-zA-Z0-9-()\_]+::[a-zA-Z0-9-()\_]+.#'
+    -'#Call to an undefined static method NadzorServera\\Skijasi\\Module\\Post\\Models\\[a-zA-Z0-9-()\_]+::[a-zA-Z0-9-()\_]+.#'
+    -'#Call to an undefined static method Illuminate\\Support\\Facades\\DB::rollback[()]+.#'
+
+
+
+
+
