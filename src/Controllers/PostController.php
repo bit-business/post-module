@@ -137,6 +137,7 @@ class PostController extends Controller
                 'title' => 'required|string',
                 'slug' => 'required|string|max:255|unique:NadzorServera\Skijasi\Module\Post\Models\Post',
                 'content' => 'required|string',
+                'link' => 'nullable|string',
                 'meta_title' => 'nullable|string',
                 'meta_description' => 'nullable|string',
                 'summary' => 'nullable|string',
@@ -153,6 +154,7 @@ class PostController extends Controller
                 'parent_id' => $request->parent ?? null,
                 'category_id' => $request->category,
                 'title' => $request->title,
+                'link' => $request->link,
                 'meta_title' => $request->meta_title,
                 'meta_description' => $request->meta_description,
                 'slug' => $request->slug,
@@ -307,6 +309,7 @@ class PostController extends Controller
             $request->validate([
                 'id' => 'required|exists:NadzorServera\Skijasi\Module\Post\Models\Post',
                 'title' => 'required|string',
+                'link' => 'nullable|string',
                 'slug' => 'required|string|max:255|exists:NadzorServera\Skijasi\Module\Post\Models\Post,slug',
                 'content' => 'required|string',
                 'meta_title' => 'nullable|string',
@@ -324,6 +327,7 @@ class PostController extends Controller
             $post->parent_id = $request->parent ?? null;
             $post->category_id = $request->category;
             $post->title = $request->title;
+            $post->link = $request->link;
             $post->slug = $request->slug;
             $post->meta_title = $request->meta_title;
             $post->meta_description = $request->meta_description;

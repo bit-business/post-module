@@ -108,6 +108,13 @@
                     :placeholder="$t('posts.add.field.featured.placeholder')"
                     :alert="errors.thumbnail"
                   ></skijasi-upload-image>
+                  <skijasi-text
+                    v-model="post.link"
+                    size="12"
+                    :label="$t('Link')"
+                    :placeholder="$t('')"
+                    :alert="errors.link"
+                  ></skijasi-text>
                 </vs-row>
               </skijasi-collapse-item>
             </skijasi-collapse>
@@ -138,6 +145,7 @@ export default {
     post: {
       title: "",
       slug: "",
+      link: "",
       content: "",
       metaTitle: "",
       metaDescription: "",

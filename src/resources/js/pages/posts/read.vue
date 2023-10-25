@@ -27,6 +27,10 @@
               <td>{{ posts.user.name }}</td>
             </tr>
             <tr>
+              <th>{{ $t("Link") }}</th>
+              <td>{{ posts.link }}</td>
+            </tr>
+            <tr>
               <th>{{ $t("posts.detail.header.slug") }}</th>
               <td>{{ posts.slug }}</td>
             </tr>
@@ -84,6 +88,7 @@ export default {
         name: ""
       },
       slug: "",
+      link: "",
       published: "",
       content: "",
       metaTitle: "",

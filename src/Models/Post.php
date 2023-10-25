@@ -25,6 +25,7 @@ class Post extends Model
         'parent_id',
         'category_id',
         'title',
+        'link',
         'slug',
         'meta_title',
         'meta_description',

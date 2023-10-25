@@ -2,9 +2,9 @@
 
 return [
     'auth' => [
-        'user_not_logged_in' => 'User is not logged in.',
+        'user_not_logged_in' => 'Niste prijavljeni!',
     ],
     'analytics' => [
-        'no_service_account' => 'No service account credentials found.',
+        'no_service_account' => 'Ne možemo pronaći račun za analitiku.',
     ],
 ];

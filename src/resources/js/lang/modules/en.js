@@ -2,13 +2,13 @@ export const label = "English";
 
 export default {
   posts: {
-    title: "Posts",
+    title: "Članci",
     header: {
-      title: "Title",
-      author: "Author",
-      category: "Category",
+      title: "Naslov",
+      author: "Autor članka",
+      category: "Kategorija",
       tags: "Tags",
-      action: "Action",
+      action: "Opcije",
     },
     footer: {
       descriptionTitle: "Registries",
@@ -17,15 +17,15 @@ export default {
     },
     add: {
       title: "Post Content",
-      publish: "Publish Setting",
+      publish: "Postavke članka",
       categoryAndTags: "Category & Tags",
-      featuredImage: "Featured Image",
+      featuredImage: "Slika za naslovnicu članka",
       seo: "SEO",
-      button: "Save",
+      button: "Spremi",
       field: {
         title: {
-          title: "Title",
-          placeholder: "Title",
+          title: "Naslov",
+          placeholder: "Naslov",
         },
         category: {
           title: "Category",
@@ -70,11 +70,11 @@ export default {
       publish: "Publish Setting",
       categoryAndTags: "Category & Tags",
       seo: "SEO",
-      button: "Save",
+      button: "Spremi",
       field: {
         title: {
-          title: "Title",
-          placeholder: "Title",
+          title: "Naslov",
+          placeholder: "Naslov",
         },
         category: {
           title: "Category",
@@ -330,6 +330,6 @@ export default {
     },
   },
   browse : {
-    'visitBlog' : 'Visit Blog'
+    'visitBlog' : 'Pogledaj na Webu'
   },
 };
