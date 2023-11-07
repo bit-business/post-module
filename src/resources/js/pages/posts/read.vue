@@ -58,6 +58,7 @@
               <th>{{ $t("posts.detail.header.summary") }}</th>
               <td>{{ posts.summary }}</td>
             </tr>
+            <!--
             <tr>
               <th>{{ $t("posts.detail.header.category") }}</th>
               <td>{{ posts.category ? posts.category.title : null }}</td>
@@ -70,6 +71,8 @@
                 </vs-chip>
               </td>
             </tr>
+
+          -->
           </table>
         </vs-card>
       </vs-col>

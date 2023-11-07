@@ -57,12 +57,14 @@
                 <skijasi-th sort-key="author">
                   {{ $t("posts.header.author") }}
                 </skijasi-th>
+                <!--
                 <skijasi-th sort-key="category">
                   {{ $t("posts.header.category") }}
                 </skijasi-th>
                 <skijasi-th sort-key="tags">
                   {{ $t("posts.header.tags") }}
                 </skijasi-th>
+                -->
                 <vs-th> {{ $t("posts.header.action") }} </vs-th>
               </template>
 
@@ -80,19 +82,20 @@
                         ></vs-icon>
                         {{ post.viewCount }}
                       </div>
-                      <div>
+                     <!-- <div>
                         <vs-icon
                           icon="chat_bubble"
                           color="gray"
                           size="16px"
                         ></vs-icon>
                         {{ post.commentCount }}
-                      </div>
+                      </div>-->
                     </div>
                   </vs-td>
                   <vs-td :data="post.user.name">
                     {{ post.user.name }}
                   </vs-td>
+                  <!--
                   <vs-td :data="post.category">
                     {{ post.category ? post.category.title : null }}
                   </vs-td>
@@ -101,15 +104,14 @@
                       {{ tag.title }}
                     </vs-chip>
                   </vs-td>
+-->
                   <vs-td style="width: 1%; white-space: nowrap">
-                    <skijasi-dropdown vs-trigger-click>
-                      <vs-button
+             
+                
+                      
+                        <vs-button
                         size="large"
                         type="flat"
-                        icon="more_vert"
-                      ></vs-button>
-                      <vs-dropdown-menu>
-                        <skijasi-dropdown-item
                           icon="visibility"
                           :to="{
                             name: 'PostsRead',
@@ -117,9 +119,11 @@
                           }"
                           v-if="$helper.isAllowed('read_posts')"
                         >
-                          Detail
-                        </skijasi-dropdown-item>
-                        <skijasi-dropdown-item
+                          Detaljnije
+                        </vs-button>
+                        <vs-button
+                        size="large"
+                        type="flat"
                           icon="edit"
                           :to="{
                             name: 'PostsEdit',
@@ -127,16 +131,18 @@
                           }"
                           v-if="$helper.isAllowed('edit_posts')"
                         >
-                          Edit
-                        </skijasi-dropdown-item>
-                        <skijasi-dropdown-item
+                          Izmijeni
+                        </vs-button>
+                        <vs-button
+                        size="large"
+                        type="flat"
                           icon="delete"
                           @click="confirmDelete(post.id)"
                           v-if="$helper.isAllowed('delete_posts')"
                         >
-                          Delete
-                        </skijasi-dropdown-item>
-                        <skijasi-dropdown-item
+                          Obriši
+                        </vs-button>
+                        <vs-button
                           icon="poll"
                           v-if="
                             $helper.isAllowed('browse_posts') &&
@@ -149,8 +155,8 @@
                             style="color: inherit"
                             >Detail Analytic</a
                           >
-                        </skijasi-dropdown-item>
-                        <skijasi-dropdown-item
+                        </vs-button>
+                        <vs-button
                           icon="description"
                           v-if="
                             $helper.isAllowed('browse_posts') &&
@@ -163,9 +169,9 @@
                             style="color: inherit"
                             >View Post</a
                           >
-                        </skijasi-dropdown-item>
-                      </vs-dropdown-menu>
-                    </skijasi-dropdown>
+                        </vs-button>
+                     
+             
                   </vs-td>
                 </vs-tr>
               </template>

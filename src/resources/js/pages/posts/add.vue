@@ -77,6 +77,8 @@
                   ></skijasi-switch>
                 </vs-row>
               </skijasi-collapse-item>
+
+              <!--
               <skijasi-collapse-item open style="background: #fff; margin-bottom: 30px">
                 <h3 slot="header">{{ $t("posts.add.categoryAndTags") }}</h3>
                 <vs-row class="mb-0">
@@ -98,6 +100,9 @@
                   ></skijasi-select-multiple>
                 </vs-row>
               </skijasi-collapse-item>
+-->
+
+
               <skijasi-collapse-item open style="background: #fff;">
                 <h3 slot="header">{{ $t("posts.add.featuredImage") }}</h3>
                 <vs-row class="mb-0">
@@ -111,8 +116,8 @@
                   <skijasi-text
                     v-model="post.link"
                     size="12"
-                    :label="$t('Link')"
-                    :placeholder="$t('')"
+                    :label="$t('Link na koji vodi vijest')"
+                    :placeholder="$t('Link na koji vodi vijest')"
                     :alert="errors.link"
                   ></skijasi-text>
                 </vs-row>

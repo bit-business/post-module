@@ -7,19 +7,19 @@ export default {
       title: "Naslov",
       author: "Autor članka",
       category: "Kategorija",
-      tags: "Tags",
+      tagovi: "Tagovi",
       action: "Opcije",
     },
     footer: {
-      descriptionTitle: "Registries",
-      descriptionConnector: "of",
-      descriptionBody: "Pages",
+      descriptionTitle: "Broj vijesti",
+      descriptionConnector: "od",
+      descriptionBody: "Stranica",
     },
     add: {
-      title: "Post Content",
+      title: "Novi članak",
       publish: "Postavke članka",
-      categoryAndTags: "Category & Tags",
-      featuredImage: "Slika za naslovnicu članka",
+      categoryAndTagovi: "Kategorije (ne radi)",
+      featuredImage: "Postavke za sliku članka",
       seo: "SEO",
       button: "Spremi",
       field: {
@@ -28,47 +28,47 @@ export default {
           placeholder: "Naslov",
         },
         category: {
-          title: "Category",
-          placeholder: "Category",
+          title: "Kategorija",
+          placeholder: "Kategorija",
         },
-        tags: {
-          title: "Tags",
-          placeholder: "Tags",
+        tagovi: {
+          title: "Tagovi",
+          placeholder: "Tagovi",
         },
         slug: {
-          title: "Slug",
-          placeholder: "Slug for URL",
+          title: "Izgled linka",
+          placeholder: "Izgled linka (ne treba mijenjati)",
         },
         summary: {
-          title: "Summary",
-          placeholder: "Summary"
+          title: "Sažetak",
+          placeholder: "Sažetak"
         },
         metaTitle: {
-          title: "Meta Title",
-          placeholder: "Meta Title for SEO"
+          title: "Google Naslov",
+          placeholder: "Google naslov za SEO"
         },
         metaDescription: {
-          title: "Meta Description",
-          placeholder: "Meta Description for SEO"
+          title: "Meta Opis",
+          placeholder: "Meta opis za SEO"
         },
         content: {
-          title: "Content",
-          placeholder: "Content"
+          title: "Sadržaj članka",
+          placeholder: "Sadržaj članka"
         },
         published: {
-          title: "Published",
-          placeholder: "Published"
+          title: "Objavi na webu",
+          placeholder: "Objavi na webu"
         },
         featured: {
-          title: "Thumbnail",
-          placeholder: "Thumbnail",
+          title: "Slika članka",
+          placeholder: "Slika članka",
         },
       }
     },
     edit: {
-      title: "Post Content",
-      publish: "Publish Setting",
-      categoryAndTags: "Category & Tags",
+      title: "Izmjena vijesti",
+      publish: "Objavi promjene",
+      categoryAndTagovi: "Kategorije (ne radi)",
       seo: "SEO",
       button: "Spremi",
       field: {
@@ -77,54 +77,54 @@ export default {
           placeholder: "Naslov",
         },
         category: {
-          title: "Category",
-          placeholder: "Category",
+          title: "Kategorija",
+          placeholder: "Kategorija",
         },
-        tags: {
-          title: "Tags",
-          placeholder: "Tags",
+        tagovi: {
+          title: "Tagovi",
+          placeholder: "Tagovi",
         },
         slug: {
-          title: "Slug",
-          placeholder: "Slug for URL",
+          title: "Izgled linka",
+          placeholder: "Izgled linka (ne treba mijenjati)",
         },
         summary: {
-          title: "Summary",
-          placeholder: "Summary"
+          title: "Sažetak",
+          placeholder: "Sažetak"
         },
         metaTitle: {
-          title: "Meta Title",
-          placeholder: "Meta Title for SEO"
+          title: "Google Naslov",
+          placeholder: "Google Naslov za SEO"
         },
         metaDescription: {
-          title: "Meta Description",
-          placeholder: "Meta Description for SEO"
+          title: "SEO opis članka",
+          placeholder: "SEO opis članka"
         },
         content: {
-          title: "Content",
-          placeholder: "Content"
+          title: "Sadržaj",
+          placeholder: "Sadržaj"
         },
         published: {
-          title: "Published",
-          placeholder: "Published"
+          title: "Objavi na webu",
+          placeholder: "Objavi na webu"
         },
       }
     },
     detail: {
       title: "Detail Post",
       header: {
-        title: "Title",
-        author: "Author",
-        slug: "Slug",
-        content: "Content",
-        thumbnail: "Thumbnail",
-        metaTitle: "Meta Title",
-        metaDescription: "Meta Description",
-        summary: "Summary",
-        published: "Published",
+        title: "Naslov",
+        author: "Autor",
+        slug: "Izgled linka",
+        content: "Sadržaj članka",
+        thumbnail: "Slika članka",
+        metaTitle: "SEO Naslov",
+        metaDescription: "SEO Opis",
+        summary: "Sažetak",
+        published: "Objavi na webu",
         category: "Category",
-        tags: "Tags",
-        action: "Action",
+        tagovi: "Tagovi",
+        action: "Opcije",
       },
     },
   },
@@ -145,7 +145,7 @@ export default {
     },
     add: {
       title: "Add Category",
-      button: "Save",
+      button: "Spremi",
       field: {
         title: {
           title: "Title *",
@@ -198,7 +198,7 @@ export default {
     detail: {
       title: "Detail Category",
       header: {
-        title: "Title",
+        title: "Naslov",
         metaTitle: "Meta Title",
         parent: "Parent Category",
         slug: "Slug",
@@ -207,27 +207,27 @@ export default {
       },
     },
   },
-  tags: {
-    title: "Tags",
+  tagovi: {
+    title: "Tagovi",
     header: {
-      title: "Title",
-      metaTitle: "Meta Title",
-      slug: "Slug",
-      content: "Description",
-      action: "Action",
+      title: "Naslov",
+      metaTitle: "SEO Naslov",
+      slug: "Slug link",
+      content: "Opis",
+      action: "Opcije",
     },
     footer: {
-      descriptionTitle: "Registries",
-      descriptionConnector: "of",
-      descriptionBody: "Pages",
+      descriptionTitle: "Broj vijesti",
+      descriptionConnector: "od",
+      descriptionBody: "Stranica",
     },
     add: {
       title: "Add Tag",
-      button: "Save",
+      button: "Spremi",
       field: {
         title: {
-          title: "Title",
-          placeholder: "Title",
+          title: "Naslov",
+          placeholder: "Naslov",
         },
         metaTitle: {
           title: "Meta Title",
@@ -238,18 +238,18 @@ export default {
           placeholder: "Slug for URL",
         },
         content: {
-          title: "Description",
-          placeholder: "Description"
+          title: "Opis",
+          placeholder: "Opis"
         }
       }
     },
     edit: {
-      title: "Edit Tag",
-      button: "Save",
+      title: "Izmijeni Tag",
+      button: "Spremi",
       field: {
         title: {
-          title: "Title",
-          placeholder: "Title",
+          title: "Naslov",
+          placeholder: "Naslov",
         },
         metaTitle: {
           title: "Meta Title",
@@ -266,7 +266,7 @@ export default {
       }
     },
     detail: {
-      title: "Detail Tags",
+      title: "Detail Tagovi",
       header: {
         title: "Title",
         metaTitle: "Meta Title",
@@ -286,9 +286,9 @@ export default {
       action: "Action",
     },
     footer: {
-      descriptionTitle: "Registries",
-      descriptionConnector: "of",
-      descriptionBody: "Pages",
+      descriptionTitle: "Broj vijesti",
+      descriptionConnector: "od",
+      descriptionBody: "Stranica",
     },
     add: {
       title: "Add Comment",
@@ -330,6 +330,6 @@ export default {
     },
   },
   browse : {
-    'visitBlog' : 'Pogledaj na Webu'
+    'visitBlog' : 'Pogledaj na Webu (ne radi još)'
   },
 };
