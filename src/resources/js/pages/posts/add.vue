@@ -106,13 +106,13 @@
               <skijasi-collapse-item open style="background: #fff;">
                 <h3 slot="header">{{ $t("posts.add.featuredImage") }}</h3>
                 <vs-row class="mb-0">
-                  <skijasi-upload-image
+                  <skijasi-upload-image-vijesti
                     v-model="post.thumbnail"
                     size="12"
                     :label="$t('posts.add.field.featured.title')"
                     :placeholder="$t('posts.add.field.featured.placeholder')"
                     :alert="errors.thumbnail"
-                  ></skijasi-upload-image>
+                  ></skijasi-upload-image-vijesti>
                   <skijasi-text
                     v-model="post.link"
                     size="12"
