@@ -335,7 +335,7 @@ class PostController extends Controller
             $post->content = $request->content;
             $post->published = $request->published;
             $post->thumbnail = $request->thumbnail;
-            $post->published_at = $request->published ? (string) now() : null;
+            $post->published_at = $request->published_at;
             $post->update();
             $post->tags()->sync($request->tags);
 

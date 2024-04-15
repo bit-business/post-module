@@ -330,6 +330,6 @@ export default {
     },
   },
   browse : {
-    'visitBlog' : 'Pogledaj na Webu (ne radi još)'
+    'visitBlog' : 'Pogledaj na Webu'
   },
 };

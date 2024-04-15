@@ -26,6 +26,8 @@
                   ></skijasi-editor>
                 </vs-row>
               </skijasi-collapse-item>
+
+              <!--
               <skijasi-collapse-item style="background: #fff;">
                 <h3 slot="header">{{ $t("posts.edit.seo") }}</h3>
                 <vs-row>
@@ -52,6 +54,8 @@
                   ></skijasi-textarea>
                 </vs-row>
               </skijasi-collapse-item>
+
+            -->
             </skijasi-collapse>
           </vs-col>
           <vs-col vs-lg="4" class="pr-0">
@@ -74,6 +78,15 @@
                     :placeholder="$t('posts.edit.field.published.placeholder')"
                     :alert="errors.published"
                   ></skijasi-switch>
+
+                  <skijasi-date
+                    v-model="post.published_at"
+                    size="8"
+                    :label="$t('Datum objave (opcionalno)')"
+                    :placeholder="$t('Datum objave')"
+                    :alert="errors.published_at"
+                  ></skijasi-date>
+
                 </vs-row>
               </skijasi-collapse-item>
 
@@ -150,6 +163,9 @@ export default {
       metaTitle: "",
       slug: "",
       link: "",
+
+      published_at: null,
+
       content: "",
       summary: "",
       published: true,
