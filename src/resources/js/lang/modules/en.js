@@ -139,7 +139,7 @@ export default {
       action: "Action",
     },
     footer: {
-      descriptionTitle: "Registries",
+      descriptionTitle: "Results",
       descriptionConnector: "of",
       descriptionBody: "Pages",
     },
