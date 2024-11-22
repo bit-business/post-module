@@ -15,13 +15,25 @@
       <vs-col vs-lg="12">
         <vs-card>
           <div slot="header">
-            <h3>{{ $t("posts.detail.title") }}</h3>
+            <h3>{{ $t("posts.detail.title") }} (HR)</h3>
           </div>
           <table class="skijasi-table" v-if="posts">
             <tr>
               <th>{{ $t("posts.detail.header.title") }}</th>
               <td>{{ posts.title }}</td>
             </tr>
+              <!-- English -->
+      <tr>
+        <th>{{ $t("posts.detail.header.title") }} (EN)</th>
+        <td>{{ posts.titleEn || posts.title }}</td>
+      </tr>
+      
+      <!-- Italian -->
+      <tr>
+        <th>{{ $t("posts.detail.header.title") }} (IT)</th>
+        <td>{{ posts.titleIt || posts.title }}</td>
+      </tr>
+
             <tr>
               <th>{{ $t("posts.detail.header.author") }}</th>
               <td>{{ posts.user.name }}</td>
@@ -38,10 +50,21 @@
               <th>{{ $t("posts.detail.header.published") }}</th>
               <td>{{ posts.published === 1 ? 'Yes' : 'No' }}</td>
             </tr>
-            <tr>
-              <th>{{ $t("posts.detail.header.content") }}</th>
-              <td><div class="posts-content" v-html="posts.content"></div></td>
-            </tr>
+       <!-- Content sections -->
+       <tr>
+        <th>{{ $t("posts.detail.header.content") }} (HR)</th>
+        <td><div class="posts-content" v-html="posts.content"></div></td>
+      </tr>
+      
+      <tr>
+        <th>{{ $t("posts.detail.header.content") }} (EN)</th>
+        <td><div class="posts-content" v-html="posts.contentEn || posts.content"></div></td>
+      </tr>
+      
+      <tr>
+        <th>{{ $t("posts.detail.header.content") }} (IT)</th>
+        <td><div class="posts-content" v-html="posts.contentIt || posts.content"></div></td>
+      </tr>
             <tr>
               <th>{{ $t("posts.detail.header.thumbnail") }}</th>
               <td><img class="thumbnail" :src="posts.thumbnail"></td>

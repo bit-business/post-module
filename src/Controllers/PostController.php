@@ -128,107 +128,147 @@ class PostController extends Controller
         }
     }
 
-    public function add(Request $request)
-    {
-        DB::beginTransaction();
+// In your PostController.php, update the add() method:
 
-        try {
-            $request->validate([
-                'title' => 'required|string',
-                'slug' => 'required|string|max:255|unique:NadzorServera\Skijasi\Module\Post\Models\Post',
-                'content' => 'required|string',
-                'link' => 'nullable|string',
-                'meta_title' => 'nullable|string',
-                'meta_description' => 'nullable|string',
-                'summary' => 'nullable|string',
-                'published' => 'required|boolean',
-                'tags' => 'nullable|array|exists:NadzorServera\Skijasi\Module\Post\Models\Tag,id',
-                'category' => 'nullable|exists:NadzorServera\Skijasi\Module\Post\Models\Category,id',
-                'thumbnail' => 'nullable',
-            ]);
+public function add(Request $request)
+{
+    DB::beginTransaction();
 
-            $doc = new \DOMDocument();
+    try {
+        $request->validate([
+            'title' => 'required|string',
+            'title_en' => 'nullable|string',
+            'title_it' => 'nullable|string',
+            'content_en' => 'nullable|string',
+            'content_it' => 'nullable|string',
+            'slug' => 'required|string|max:255|unique:NadzorServera\Skijasi\Module\Post\Models\Post',
+            'content' => 'required|string',
+            'link' => 'nullable|string',
+            'meta_title' => 'nullable|string',
+            'meta_description' => 'nullable|string',
+            'published' => 'required|boolean',
+            'tags' => 'nullable|array|exists:NadzorServera\Skijasi\Module\Post\Models\Tag,id',
+            'category' => 'nullable|exists:NadzorServera\Skijasi\Module\Post\Models\Category,id',
+            'thumbnail' => 'nullable',
+        ]);
 
-            $post = Post::create([
-                'user_id' => auth()->user()->id,
-                'parent_id' => $request->parent ?? null,
-                'category_id' => $request->category,
-                'title' => $request->title,
-                'link' => $request->link,
-                'meta_title' => $request->meta_title,
-                'meta_description' => $request->meta_description,
-                'slug' => $request->slug,
-                'summary' => $request->summary,
-                'content' => $request->content,
-                'thumbnail' => $request->thumbnail,
-                'published' => $request->published,
-                'comment_count' => 0,
-                'published_at' => $request->published ? (string) now() : null,
-            ]);
+        $post = Post::create([
+            'user_id' => auth()->user()->id,
+            'parent_id' => $request->parent ?? null,
+            'category_id' => $request->category,
+            'title' => $request->title,
+            'title_en' => $request->title_en,
+            'title_it' => $request->title_it,
+            'content' => $request->content,
+            'content_en' => $request->content_en,
+            'content_it' => $request->content_it,
+            'link' => $request->link,
+            'meta_title' => $request->meta_title,
+            'meta_description' => $request->meta_description,
+            'slug' => $request->slug,
+            'thumbnail' => $request->thumbnail,
+            'published' => $request->published,
+            'comment_count' => 0,
+            'published_at' => $request->published ? (string) now() : null,
+        ]);
 
+        if ($request->tags) {
             $post->tags()->attach($request->tags);
-
-            DB::commit();
-
-            return ApiResponse::success($post);
-        } catch (Exception $e) {
-            DB::rollback();
-
-            return ApiResponse::failed($e);
         }
+
+        DB::commit();
+
+        return ApiResponse::success($post);
+    } catch (Exception $e) {
+        DB::rollback();
+        return ApiResponse::failed($e);
     }
+}
 
-    public function read(Request $request)
-    {
-        try {
-            $request->validate([
-                'id' => 'required|exists:NadzorServera\Skijasi\Module\Post\Models\Post',
-            ]);
+// Update the edit() method:
+public function edit(Request $request)
+{
+    DB::beginTransaction();
 
-            $post = Post::with('category', 'tags', 'user:id,name')->where('id', $request->id)->first();
-            $previous = null;
-            $next = null;
+    try {
+        $request->validate([
+            'id' => 'required|exists:NadzorServera\Skijasi\Module\Post\Models\Post',
+            'title' => 'required|string',
+            'title_en' => 'nullable|string',
+            'title_it' => 'nullable|string',
+            'content_en' => 'nullable|string',
+            'content_it' => 'nullable|string',
+            'slug' => 'required|string|max:255|exists:NadzorServera\Skijasi\Module\Post\Models\Post,slug',
+            'content' => 'required|string',
+            'link' => 'nullable|string',
+            'meta_title' => 'nullable|string',
+            'meta_description' => 'nullable|string',
+            'published' => 'required|boolean',
+            'tags' => 'nullable|array|exists:NadzorServera\Skijasi\Module\Post\Models\Tag,id',
+            'category' => 'nullable|exists:NadzorServera\Skijasi\Module\Post\Models\Category,id',
+            'thumbnail' => 'nullable',
+        ]);
 
-            if (! isset($post['thumbnail'])) {
-                $doc = new \DOMDocument();
-                $content = $post->content;
-                @$doc->loadHTML($content);
-                $xpath = new \DOMXPath($doc);
-                $src = $xpath->evaluate('string(//img/@src)');
-                $post['thumbnail'] = $src === '' ? null : $src;
-            }
+        $post = Post::findOrFail($request->id);
 
-            if (! empty($post->published_at)) {
-                $previous = Post::with('category', 'tags', 'user:id,name')->where('published_at', '<', $post->published_at)->orderBy('published_at', 'desc')->first();
-                $next = Post::with('category', 'tags', 'user:id,name')->where('published_at', '>', $post->published_at)->orderBy('published_at', 'desc')->first();
-            }
-            $related = Post::with('category', 'tags', 'user:id,name')->where('category_id', $post->category_id)->limit(4)->get();
+        $post->update([
+            'user_id' => auth()->user()->id,
+            'parent_id' => $request->parent ?? null,
+            'category_id' => $request->category,
+            'title' => $request->title,
+            'title_en' => $request->title_en,
+            'title_it' => $request->title_it,
+            'content' => $request->content,
+            'content_en' => $request->content_en,
+            'content_it' => $request->content_it,
+            'link' => $request->link,
+            'meta_title' => $request->meta_title,
+            'meta_description' => $request->meta_description,
+            'slug' => $request->slug,
+            'thumbnail' => $request->thumbnail,
+            'published' => $request->published,
+            'published_at' => $request->published_at,
+        ]);
 
-            $data['post'] = $post->toArray();
-
-            if ($previous) {
-                $data['previous'] = $previous->makeHidden(['content'])->toArray();
-            } else {
-                $data['previous'] = null;
-            }
-
-            if ($next) {
-                $data['next'] = $next->makeHidden(['content'])->toArray();
-            } else {
-                $data['next'] = null;
-            }
-
-            if ($related) {
-                $data['related'] = $related->makeHidden(['content'])->toArray();
-            } else {
-                $data['related'] = null;
-            }
-
-            return ApiResponse::success($data);
-        } catch (Exception $e) {
-            return ApiResponse::failed($e);
+        if ($request->has('tags')) {
+            $post->tags()->sync($request->tags);
         }
+
+        DB::commit();
+
+        return ApiResponse::success($post);
+    } catch (Exception $e) {
+        DB::rollback();
+        return ApiResponse::failed($e);
     }
+}
+
+public function read(Request $request)
+{
+    try {
+        $request->validate([
+            'id' => 'required|exists:NadzorServera\Skijasi\Module\Post\Models\Post',
+        ]);
+
+        $post = Post::with('category', 'tags', 'user:id,name')
+            ->where('id', $request->id)
+            ->first();
+
+        // Transform data to match frontend expectations
+        $postArray = $post->toArray();
+        $postArray['titleEn'] = $post->title_en;
+        $postArray['titleIt'] = $post->title_it;
+        $postArray['contentEn'] = $post->content_en;
+        $postArray['contentIt'] = $post->content_it;
+
+        $data['post'] = $postArray;
+
+        return ApiResponse::success($data);
+    } catch (Exception $e) {
+        \Log::error('Error in read method: ' . $e->getMessage());
+        return ApiResponse::failed($e);
+    }
+}
 
     public function readBySlug(Request $request)
     {
@@ -301,53 +341,7 @@ class PostController extends Controller
         }
     }
 
-    public function edit(Request $request)
-    {
-        DB::beginTransaction();
-
-        try {
-            $request->validate([
-                'id' => 'required|exists:NadzorServera\Skijasi\Module\Post\Models\Post',
-                'title' => 'required|string',
-                'link' => 'nullable|string',
-                'slug' => 'required|string|max:255|exists:NadzorServera\Skijasi\Module\Post\Models\Post,slug',
-                'content' => 'required|string',
-                'meta_title' => 'nullable|string',
-                'meta_description' => 'nullable|string',
-                'summary' => 'nullable|string',
-                'published' => 'required|boolean',
-                'tags' => 'nullable|array|exists:NadzorServera\Skijasi\Module\Post\Models\Tag,id',
-                'category' => 'nullable|exists:NadzorServera\Skijasi\Module\Post\Models\Category,id',
-                'thumbnail' => 'nullable',
-            ]);
-
-            $post = Post::findOrFail($request->id);
-
-            $post->user_id = auth()->user()->id;
-            $post->parent_id = $request->parent ?? null;
-            $post->category_id = $request->category;
-            $post->title = $request->title;
-            $post->link = $request->link;
-            $post->slug = $request->slug;
-            $post->meta_title = $request->meta_title;
-            $post->meta_description = $request->meta_description;
-            $post->summary = $request->summary;
-            $post->content = $request->content;
-            $post->published = $request->published;
-            $post->thumbnail = $request->thumbnail;
-            $post->published_at = $request->published_at;
-            $post->update();
-            $post->tags()->sync($request->tags);
-
-            DB::commit();
-
-            return ApiResponse::success($post);
-        } catch (Exception $e) {
-            DB::rollback();
-
-            return ApiResponse::failed($e);
-        }
-    }
+ 
 
     public function delete(Request $request)
     {

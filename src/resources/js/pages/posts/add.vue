@@ -10,28 +10,72 @@
                 <h3 slot="header">{{ $t("posts.add.title") }}</h3>
 
                 <vs-row>
+                  <!-- Croatian (Default) -->
                   <skijasi-text
                     v-model="post.title"
                     size="12"
-                    :label="$t('posts.add.field.title.title')"
+                    :label="$t('posts.add.field.title.title') + ' (HR)'"
                     :placeholder="$t('posts.add.field.title.placeholder')"
                     :alert="errors.title"
                     @input="syncSlug()"
+            
                   ></skijasi-text>
-                  <skijasi-editor
-                    v-model="post.content"
+                  
+                  <!-- English -->
+                  <skijasi-text
+                    v-model="post.title_en"
                     size="12"
-                    :label="$t('posts.add.field.content.title')"
-                    :placeholder="$t('posts.add.field.content.placeholder')"
-                    :alert="errors.content"
-                  ></skijasi-editor>
-                  <skijasi-textarea
+                    :label="$t('posts.add.field.title.title') + ' (EN)'"
+                    :placeholder="$t('posts.add.field.title.placeholder')"
+                    :alert="errors.title_en"
+   
+                  ></skijasi-text>
+                  
+                  <!-- Italian -->
+                  <skijasi-text
+                    v-model="post.title_it"
+                    size="12"
+                    :label="$t('posts.add.field.title.title') + ' (IT)'"
+                    :placeholder="$t('posts.add.field.title.placeholder')"
+                    :alert="errors.title_it"
+      
+                  ></skijasi-text>
+
+                  <skijasi-editor
+  v-model="post.content"
+  size="12"
+  :label="$t('posts.edit.field.content.title') + ' (HR)'"
+  :placeholder="$t('posts.edit.field.content.placeholder')"
+  :alert="errors.content"
+  editorId="content-hr"
+></skijasi-editor>
+
+<!-- For English Content -->
+<skijasi-editor
+  v-model="post.content_en"
+  size="12"
+  :label="$t('posts.edit.field.content.title') + ' (EN)'"
+  :placeholder="$t('posts.edit.field.content.placeholder')"
+  :alert="errors.content_en"
+  editorId="content-en"
+></skijasi-editor>
+
+<!-- For Italian Content -->
+<skijasi-editor
+  v-model="post.content_it"
+  size="12"
+  :label="$t('posts.edit.field.content.title') + ' (IT)'"
+  :placeholder="$t('posts.edit.field.content.placeholder')"
+  :alert="errors.content_it"
+  editorId="content-it"
+></skijasi-editor>
+                  <!-- <skijasi-textarea
                     v-model="post.summary"
                     size="12"
                     :label="$t('posts.add.field.summary.title')"
                     :placeholder="$t('posts.add.field.summary.placeholder')"
                     :alert="errors.summary"
-                  ></skijasi-textarea>
+                  ></skijasi-textarea> -->
                 </vs-row>
               </skijasi-collapse-item>
               <skijasi-collapse-item style="background: #fff;">
@@ -149,6 +193,12 @@ export default {
     errors: {},
     post: {
       title: "",
+
+      title_en: "",
+      title_it: "",
+      content_en: "",
+      content_it: "",
+
       slug: "",
       link: "",
       content: "",

@@ -10,20 +10,64 @@
                 <h3 slot="header">{{ $t("posts.edit.title") }}</h3>
 
                 <vs-row>
-                  <skijasi-text
-                    v-model="post.title"
-                    size="12"
-                    :label="$t('posts.edit.field.title.title')"
-                    :placeholder="$t('posts.edit.field.title.placeholder')"
-                    :alert="errors.title"
-                  ></skijasi-text>
-                  <skijasi-editor
-                    v-model="post.content"
-                    size="12"
-                    :label="$t('posts.edit.field.content.title')"
-                    :placeholder="$t('posts.edit.field.content.placeholder')"
-                    :alert="errors.content"
-                  ></skijasi-editor>
+  
+      <!-- Croatian (Default) -->
+      <skijasi-text
+        v-model="post.title"
+        size="12"
+        :label="$t('posts.edit.field.title.title') + ' (HR)'"
+        :placeholder="$t('posts.edit.field.title.placeholder')"
+        :alert="errors.title"
+      ></skijasi-text>
+      
+      <!-- English -->
+      <skijasi-text
+        v-model="post.title_en"
+        size="12"
+        :label="$t('posts.edit.field.title.title') + ' (EN)'"
+        :placeholder="$t('posts.edit.field.title.placeholder')"
+        :alert="errors.title_en"
+      ></skijasi-text>
+      
+      <!-- Italian -->
+      <skijasi-text
+        v-model="post.title_it"
+        size="12"
+        :label="$t('posts.edit.field.title.title') + ' (IT)'"
+        :placeholder="$t('posts.edit.field.title.placeholder')"
+        :alert="errors.title_it"
+      ></skijasi-text>
+
+      <!-- Croatian Content (Default) -->
+      <skijasi-editor
+        v-model="post.content"
+        size="12"
+        :label="$t('posts.edit.field.content.title') + ' (HR)'"
+        :placeholder="$t('posts.edit.field.content.placeholder')"
+        :alert="errors.content"
+          editorId="content-hr"
+      ></skijasi-editor>
+
+      <!-- English Content -->
+      <skijasi-editor
+        v-model="post.content_en"
+        size="12"
+        :label="$t('posts.edit.field.content.title') + ' (EN)'"
+        :placeholder="$t('posts.edit.field.content.placeholder')"
+        :alert="errors.content_en"
+          editorId="content-en"
+      ></skijasi-editor>
+
+      <!-- Italian Content -->
+      <skijasi-editor
+        v-model="post.content_it"
+        size="12"
+        :label="$t('posts.edit.field.content.title') + ' (IT)'"
+        :placeholder="$t('posts.edit.field.content.placeholder')"
+        :alert="errors.content_it"
+          editorId="content-it"
+      ></skijasi-editor>
+
                 </vs-row>
               </skijasi-collapse-item>
 
@@ -164,6 +208,11 @@ export default {
       slug: "",
       link: "",
 
+      title_en: "",
+      title_it: "",
+      content_en: "",
+      content_it: "",
+
       published_at: null,
 
       content: "",
@@ -189,58 +238,88 @@ export default {
       this.post.slug = kebab
     },
     getPosts() {
-      this.$openLoader();
-      this.$api.skijasiPost
-        .read({
-          id: this.$route.params.id,
-        })
-        .then((response) => {
-          this.$closeLoader();
-          this.post = response.data.post;
-          this.post.published = response.data.post.published === 1 ? true : false;
-          this.post.category = response.data.post.category ? response.data.post.category.id : "";
-          if (response.data.post.tags && response.data.post.tags.length > 0) {
-            this.post.tags = response.data.post.tags.map((tag, index) => {
-              return tag.id;
-            })
-          }
-        })
-        .catch((error) => {
-          this.$closeLoader();
-          this.$vs.notify({
-            title: this.$t("alert.danger"),
-            text: error.message,
-            color: "danger",
-          });
-        });
-    },
-    submitForm() {
-      this.errors = {};
-      try {
-        this.$openLoader();
-        this.$api.skijasiPost
-          .edit(this.post)
-          .then((response) => {
-            this.$closeLoader();
-            this.$router.push({ name: "PostsBrowse" });
-          })
-          .catch((error) => {
-            this.errors = error.errors;
-            this.$closeLoader();
-            this.$vs.notify({
-              title: this.$t("alert.danger"),
-              text: error.message,
-              color: "danger",
-            });
-          });
-      } catch (error) {
+  this.$openLoader();
+  this.$api.skijasiPost
+    .read({
+      id: this.$route.params.id,
+    })
+    .then((response) => {
+      this.$closeLoader();
+      
+      const postData = response.data.post;
+      
+      // Map the camelCase fields to underscore fields
+      this.post = {
+        id: postData.id,
+        title: postData.title,
+        title_en: postData.titleEn || '', // Changed from title_en to titleEn
+        title_it: postData.titleIt || '', // Changed from title_it to titleIt
+        content: postData.content,
+        content_en: postData.contentEn || '', // Changed from content_en to contentEn
+        content_it: postData.contentIt || '', // Changed from content_it to contentIt
+        link: postData.link,
+        slug: postData.slug,
+        metaTitle: postData.meta_title,
+        metaDescription: postData.meta_description,
+        thumbnail: postData.thumbnail,
+        published: postData.published === 1,
+        published_at: postData.published_at,
+        category: postData.category ? postData.category.id : "",
+        tags: postData.tags && postData.tags.length > 0 
+          ? postData.tags.map(tag => tag.id)
+          : [],
+        commentCount: postData.comment_count || 0
+      };
+
+      console.log('Final post object after mapping:', this.post);
+    })
+    .catch((error) => {
+      console.error('Error loading post:', error);
+      this.$closeLoader();
+      this.$vs.notify({
+        title: this.$t("alert.danger"),
+        text: error.message,
+        color: "danger",
+      });
+    });
+},
+submitForm() {
+  this.errors = {};
+  try {
+    this.$openLoader();
+    
+    // Convert fields to match API expectations
+    const postData = {
+      ...this.post,
+      titleEn: this.post.title_en,
+      titleIt: this.post.title_it,
+      contentEn: this.post.content_en,
+      contentIt: this.post.content_it,
+    };
+
+    this.$api.skijasiPost
+      .edit(postData)
+      .then((response) => {
+        this.$closeLoader();
+        this.$router.push({ name: "PostsBrowse" });
+      })
+      .catch((error) => {
+        this.errors = error.errors;
+        this.$closeLoader();
         this.$vs.notify({
           title: this.$t("alert.danger"),
           text: error.message,
           color: "danger",
         });
-      }
-    },
+      });
+  } catch (error) {
+    this.$vs.notify({
+      title: this.$t("alert.danger"),
+      text: error.message,
+      color: "danger",
+    });
+  }
+},
     getCategory() {
       this.$openLoader();
       this.$api.skijasiCategory
